@@ -1,17 +1,242 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Lab5.Views.MainPage">
+<ContentPage
+    x:Class="Lab5.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Lab5.ViewModels"
+    x:DataType="vm:MyViewModel">
+    <!--  Whenever I write vm:, look inside the Lab5.ViewModels namespace.  -->
+    <!--  My bindings will use properties and commands from MyViewModel.  -->
 
-    <ScrollView>
+    <ContentPage.BindingContext>
+        <vm:MyViewModel />
+        <!--  Creates a ViewModel instance and connects it to this page so XAML can access its properties and commands  -->
+    </ContentPage.BindingContext>
+
+    <!--<ScrollView>
 
         <VerticalStackLayout>
 
-            <Label Text="Hello World!"
-                   Style="{StaticResource Headline}" />
+            <Label
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Lab 5!" />
+
+            <HorizontalStackLayout>
+                <Label SemanticProperties.HeadingLevel="Level3" Text="Game Name: " />
+
+                <Label SemanticProperties.HeadingLevel="Level3" Text="{Binding GameOne.Name}" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label SemanticProperties.HeadingLevel="Level3" Text="Difficulty: " />
+
+                <Label SemanticProperties.HeadingLevel="Level3" Text="{Binding GameOne.Difficulty}" TextColor="{Binding DifficultyColor}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label SemanticProperties.HeadingLevel="Level3" Text="Number of Players: " />
+
+                <Label SemanticProperties.HeadingLevel="Level3" Text="{Binding GameOne.NumberOfPlayers}" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label SemanticProperties.HeadingLevel="Level3" Text="Number of Rounds: " />
+
+                <Label SemanticProperties.HeadingLevel="Level3" Text="{Binding GameOne.Rounds}" />
+            </HorizontalStackLayout>
+
+    -->
+    <!--  Im trying out this dropdownlist  -->
+    <!--
+            <Picker x:Name="DifficultyPicker" Title="Select Difficulty">
+                <Picker.Items>
+                    <x:String>Easy</x:String>
+                    <x:String>Intermediate</x:String>
+                    <x:String>Hard</x:String>
+                </Picker.Items>
+            </Picker>
+
+    -->
+    <!--  Path = Which property of that control?  -->
+    <!--
+            <Button
+                Command="{Binding ChangeTheDifficultyCommand}"
+                CommandParameter="{Binding Source={x:Reference DifficultyPicker}, Path=SelectedItem}"
+                Text="Change Difficulty" />
 
         </VerticalStackLayout>
 
+        The commented out code is what I typed myself, and while its functional its not preety
+
+
+
+    </ScrollView>-->
+
+
+    <ScrollView BackgroundColor="#F4F4FA">
+        <VerticalStackLayout
+            Padding="16"
+            HorizontalOptions="Center"
+            Spacing="20"
+            WidthRequest="800">
+
+            <!--  Page Header  -->
+            <VerticalStackLayout
+                Margin="0,15,0,0"
+                HorizontalOptions="Center"
+                Spacing="5">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    Text="Game Settings"
+                    TextColor="#242047" />
+
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Lab 5"
+                    TextColor="#77778A" />
+            </VerticalStackLayout>
+
+            <!--  White Game Card  -->
+            <Border
+                Padding="16"
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 18"
+                StrokeThickness="0">
+
+                <VerticalStackLayout Spacing="20">
+
+                    <!--  Game Name and Difficulty Badge  -->
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+
+                            <Label
+                                FontSize="12"
+                                Text="CURRENT GAME"
+                                TextColor="#77778A" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="{Binding GameOne.Name}"
+                                TextColor="#242047" />
+                        </VerticalStackLayout>
+
+                        <Border
+                            Grid.Column="1"
+                            Padding="14,10"
+                            BackgroundColor="Black"
+                            StrokeShape="RoundRectangle 25"
+                            StrokeThickness="0"
+                            VerticalOptions="Center">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="22"
+                                Text="{Binding GameOne.Difficulty}"
+                                TextColor="{Binding DifficultyColor}" />
+                        </Border>
+                    </Grid>
+
+                    <!--  Divider  -->
+                    <BoxView HeightRequest="1" Color="#E5E5EF" />
+
+                    <!--  Players and Rounds Cards  -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+
+                        <!--  Players  -->
+                        <Border
+                            Grid.Column="0"
+                            Padding="12"
+                            BackgroundColor="#F4F4FA"
+                            StrokeShape="RoundRectangle 14"
+                            StrokeThickness="0">
+
+                            <VerticalStackLayout Spacing="5">
+                                <Label
+                                    FontSize="12"
+                                    Text="Players"
+                                    TextColor="#77778A" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    Text="{Binding GameOne.NumberOfPlayers}"
+                                    TextColor="#242047" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!--  Rounds  -->
+                        <Border
+                            Grid.Column="1"
+                            Padding="12"
+                            BackgroundColor="#F4F4FA"
+                            StrokeShape="RoundRectangle 14"
+                            StrokeThickness="0">
+
+                            <VerticalStackLayout Spacing="5">
+                                <Label
+                                    FontSize="12"
+                                    Text="Rounds"
+                                    TextColor="#77778A" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    Text="{Binding GameOne.Rounds}"
+                                    TextColor="#242047" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!--  Divider  -->
+                    <BoxView HeightRequest="1" Color="#E5E5EF" />
+
+                    <!--  Difficulty Section  -->
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Change difficulty"
+                        TextColor="#242047" />
+
+                    <!--  Dropdown  -->
+                    <Picker
+                        x:Name="DifficultyPicker"
+                        Title="Select difficulty"
+                        BackgroundColor="White"
+                        TextColor="#242047"
+                        TitleColor="#77778A">
+
+                        <Picker.Items>
+                            <x:String>Easy</x:String>
+                            <x:String>Intermediate</x:String>
+                            <x:String>Hard</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <!--  Button executes RelayCommand  -->
+                    <Button
+                        BackgroundColor="#5030D8"
+                        Command="{Binding ChangeTheDifficultyCommand}"
+                        CommandParameter="{Binding Source={x:Reference DifficultyPicker}, Path=SelectedItem}"
+                        Clicked="Button_Clicked"
+                        CornerRadius="12"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        Text="Change Difficulty"
+                        TextColor="White" />
+
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
     </ScrollView>
 
+
 </ContentPage>
+
+    

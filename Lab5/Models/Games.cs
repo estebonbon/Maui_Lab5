@@ -17,7 +17,7 @@ namespace Lab5.Models
     {
         public string? Name { get; set; }
 
-        public string? Description { get; set; }
+        //public string? Description { get; set; }
 
         public Difficulty Difficulty { get; set; }
 
